@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+//next
 const App: React.FC = () => {
   const navLinks = ['Cómo funciona', 'Bodega', 'Noticias', 'Winepaper', 'About'];
 
