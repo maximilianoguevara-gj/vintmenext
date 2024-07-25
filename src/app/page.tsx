@@ -1,113 +1,81 @@
-import Image from "next/image";
+import * as React from 'react';
 
-export default function Home() {
+const App: React.FC = () => {
+  const navLinks = ['Cómo funciona', 'Bodega', 'Noticias', 'Winepaper', 'About'];
+
+  const handleLoginWithGoogle = () => {
+    const clientId = 'YOUR_CLIENT_ID'; // Replace with your Google OAuth client ID
+    const redirectUri = 'YOUR_REDIRECT_URI'; // Replace with your redirect URI
+    const scope = 'email profile openid'; // Specify the scopes your application requires
+
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=token`;
+
+    window.location.href = authUrl;
+  };
+
+  const connectMetaMask = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        console.log('Connected to MetaMask');
+        console.log('Accounts:', accounts);
+      } catch (error) {
+        console.error('Error connecting to MetaMask:', error);
+      }
+    } else {
+      alert('Please install MetaMask to use this feature');
+    }
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <header className="bg-gray-900 text-white p-4 flex justify-between items-center">
+        <div className="flex items-center gap-4">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/f166cc8c2964ed7a3bbc1b91eaee5969d85bd5451c9bce02256e46a0754ad65a?apiKey=8ae6cc92657a4a909dc4ca9387cda3e2&"
+            alt="Vint primary logo"
+            className="w-16"
+          />
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/53c5af48ecc62135316093c076a0f5c3f7c16531710e8b4bd9881b0ab7d42d4e?apiKey=8ae6cc92657a4a909dc4ca9387cda3e2&"
+            alt="Vint secondary logo"
+            className="w-32"
+          />
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+        <nav className="flex gap-4">
+          {navLinks.map((link, index) => (
+            <a href="#" key={index} className="text-lg">
+              {link}
+            </a>
+          ))}
+        </nav>
+        <div className="flex gap-4">
+          <button className="bg-purple-700 text-white px-4 py-2 rounded">
+            Vint!
+          </button>
+          <button className="bg-white text-purple-700 border border-purple-700 px-4 py-2 rounded">
+            Conectar
+          </button>
+        </div>
+      </header>
+      <section className="relative w-full h-screen">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/20e3aa5412d43c102ac2d24db2ba7c0587238dad7cb9bb882a1fa0df16fa926c?apiKey=8ae6cc92657a4a909dc4ca9387cda3e2&"
+          alt="Descriptive text for image"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
+        <section className="absolute inset-0 flex flex-col items-center justify-center text-center bg-black bg-opacity-50 p-8 rounded-xl shadow-lg">
+          <h1 className="text-5xl font-bold text-white">Vintvenidos</h1>
+          <p className="text-xl text-white mt-4">
+            Una nueva forma de consumir vinos de colección. Aplicando tecnología blockchain para reducir intermediarios entre las bodegas de la región y sus clientes.
           </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <button className="mt-6 bg-purple-700 text-white px-6 py-3 rounded">
+            Conectá tu billetera
+          </button>
+        </section>
+      </section>
+    </>
   );
-}
+};
+
+export default App;
