@@ -1,6 +1,5 @@
 // pages/404.js
 import Link from 'next/link';
-import styles from '../styles/404.module.css'; // Si tienes un archivo de estilos
 
 const Custom404 = () => {
   return (
