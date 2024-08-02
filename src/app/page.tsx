@@ -1,14 +1,13 @@
-// pages/page.tsx
+// pages/Page.tsx
 
-import React from "react";
-import Image from "../components/Image";
+import React from 'react';
 
-const Page = (): JSX.Element => {
-  return (
-    <div>
-      <Image />
-    </div>
-  );
+const Page: React.FC = () => {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <h1>Under Construction</h1>
+        </div>
+    );
 };
 
 export default Page;
