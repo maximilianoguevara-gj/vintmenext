@@ -1,5 +1,6 @@
 // pages/Page.tsx
 
+
 import React from 'react';
 
 const Page: React.FC = () => {
